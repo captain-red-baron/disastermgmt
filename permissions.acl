@@ -39,45 +39,42 @@ rule NetworkAdminUser {
     action: ALLOW
 }
 
-/* 
-rule EverybodyCanSubmitTransactions {
-    description: "Allow all participants to submit transactions"
-    participant: "com.muellermarcel.disastermgmt.SampleParticipant"
-    operation: CREATE
-    resource: "com.muellermarcel.disastermgmt.SampleTransaction"
-    action: ALLOW
-}
-
-rule OwnerHasFullAccessToTheirAssets {
-    description: "Allow all participants full access to their assets"
-    participant(p): "com.muellermarcel.disastermgmt.SampleParticipant"
-    operation: ALL
-    resource(r): "com.muellermarcel.disastermgmt.SampleAsset"
-    condition: (r.owner.getIdentifier() === p.getIdentifier())
-    action: ALLOW
-}
-
-rule SystemACL {
-  description:  "System ACL to permit all access"
-  participant: "org.hyperledger.composer.system.Participant"
+rule CoordinatorsCanCreateRequests {
+  description: "Coordinators are allowed to create new aid ressource requests"
+  participant: "com.muellermarcel.disastermgmt.Coordinator"
   operation: ALL
-  resource: "org.hyperledger.composer.system.**"
+  resource: "com.muellermarcel.disastermgmt.CreateAidRequest"
   action: ALLOW
 }
 
-rule NetworkAdminUser {
-    description: "Grant business network administrators full access to user resources"
-    participant: "org.hyperledger.composer.system.NetworkAdmin"
-    operation: ALL
-    resource: "**"
-    action: ALLOW
+rule CoordinatorsCanCancelRequests {
+  description: "Coordinators are allowed to cancel a aid ressource requests"
+  participant: "com.muellermarcel.disastermgmt.Coordinator"
+  operation: ALL
+  resource: "com.muellermarcel.disastermgmt.CancelAidRequest"
+  action: ALLOW
 }
 
-rule NetworkAdminSystem {
-    description: "Grant business network administrators full access to system resources"
-    participant: "org.hyperledger.composer.system.NetworkAdmin"
-    operation: ALL
-    resource: "org.hyperledger.composer.system.**"
-    action: ALLOW
-} 
-*/
+rule CoordinatorsCanMarkAsLost {
+  description: "Coordinators mark lost ressources"
+  participant: "com.muellermarcel.disastermgmt.Coordinator"
+  operation: ALL
+  resource: "com.muellermarcel.disastermgmt.LostPendingRessouces"
+  action: ALLOW
+}
+
+rule AidOrganizationsCanSendAid {
+  description: "AidOrgs an send Aid Ressources for aid requests"
+  participant: "com.muellermarcel.disastermgmt.AidOrg"
+  operation: ALL
+  resource: "com.muellermarcel.disastermgmt.SendAidRessource"
+  action: ALLOW
+}
+
+rule CheckpointsCanMarkArrival {
+  description: "Coordination check points can mark arrived aid ressources"
+  participant: "com.muellermarcel.disastermgmt.CoordCkpt"
+  operation: ALL
+  resource: "com.muellermarcel.disastermgmt.ConfirmRessourceArrival"
+  action: ALLOW
+}
