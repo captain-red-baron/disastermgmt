@@ -48,6 +48,7 @@ asset AidRequest identified by aidRequestId {
   o Double pendingAidRessourceAmount
   o Double neededAidRessourceAmount
   o Double receivedAidRessourceAmount
+  o AidRequestStatus status
 }
 
 /**
@@ -105,7 +106,7 @@ Creating a new aid request by a coordinator.
 */
 transaction CreateAidRequest {
   --> CoordCkpt coordCkpt
-  o String aidRessourceId
+  o String aidRequestId
   o AidRessource aidRessource
   o Double aidAmount
 }
