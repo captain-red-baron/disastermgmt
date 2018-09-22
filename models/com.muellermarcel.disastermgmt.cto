@@ -16,14 +16,14 @@
 namespace com.muellermarcel.disastermgmt
 
 /**
-* An Aid Organization providing aid ressources in case of a disaster
+An Aid Organization providing aid ressources in case of a disaster
 */
 participant AidOrg identified by aidOrgId {
   o String aidOrgId
 }
 
 /**
-* A coordination check point where aid ressources are delivered, verified and coordinated.
+A coordination check point where aid ressources are delivered, verified and coordinated.
 */
 participant CoordCkpt identified by coordCkptId {
   o String coordCkptId
@@ -31,28 +31,27 @@ participant CoordCkpt identified by coordCkptId {
 }
 
 /**
-* A coordinator moving freely in the disasterous area to see needs for aid ressources 
-* reuesting them.
+A coordinator moving freely in the disasterous area to see needs for aid ressources 
+reuesting them.
 */
 participant Coordinator identified by coordinatorId {
   o String coordinatorId
 }
 
 /** 
-* An request for aid to be delivered to a specific coordination check point.
-* 
+An request for aid to be delivered to a specific coordination check point.
 */
 asset AidRequest identified by aidRequestId {
   o String aidRequestId
   --> CoordCkpt coordCkpt
-  o AidRessource AidRessource
+  o AidRessource aidRessource
   o Double pendingAidRessourceAmount
   o Double neededAidRessourceAmount
   o Double receivedAidRessourceAmount
 }
 
 /**
-* A position identified by latitude and longitude
+A position identified by latitude and longitude
 */
 concept Position {
   o Double lat
@@ -60,7 +59,7 @@ concept Position {
 }
 
 /** 
-* Aid ressources which might be needed at the location of a disaster.
+Aid ressources which might be needed at the location of a disaster.
 */
 enum AidRessource {
   o VOLUNTEER
@@ -73,7 +72,7 @@ enum AidRessource {
 }
 
 /**
-* The status of an aid request.
+The status of an aid request.
 */
 enum AidRequestStatus {
   o REQUESTED
@@ -82,38 +81,38 @@ enum AidRequestStatus {
 }
 
 /**
-* A transaction for the aid organitations to send a requested
-* aid ressource.
+A transaction for the aid organitations to send a requested
+aid ressource.
 */
-transaction sendAidRessource {
+transaction SendAidRessource {
   --> AidRequest asset
   o AidRessource aidRessource
   o Double aidAmount
 }
 
 /** 
-* The confirmation of an aid ressource arrival done by the 
-* coordination checkpoints.
+The confirmation of an aid ressource arrival done by the 
+coordination checkpoints.
 */
-transaction confirmRessourceArrival {
+transaction ConfirmRessourceArrival {
   --> AidRequest asset
   o AidRessource aidRessource
   o Double aidAmount
 }
 
 /**
-* Creating a new aid request by a coordinator.
+Creating a new aid request by a coordinator.
 */
-transaction createAidRequest {
+transaction CreateAidRequest {
   --> CoordCkpt coordCkpt
   o AidRessource aidRessource
   o Double aidAmount
 }
 
 /**
-* Cancel a aid request by a coordinator. For example if not needed anymore.
+Cancel a aid request by a coordinator. For example if not needed anymore.
 */
-transaction cancelAidRequest {
+transaction CancelAidRequest {
   --> AidRequest asset
 }
 
