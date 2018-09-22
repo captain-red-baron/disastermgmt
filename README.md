@@ -7,7 +7,7 @@ Contents
 
 ## Overview
 
-[overview](docs/blockchain_disaster.png)
+[overview](disastermgmt/doc/blockchain_disaster.png)
 
 In case of a natural desaster nothing is more important than clear communication and coordination between all entities participation in helping. The propused network ensures an untrusted decentralized Hyperledger blockchain implementation of that scenario.
 
