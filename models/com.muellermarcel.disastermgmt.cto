@@ -118,5 +118,12 @@ transaction CancelAidRequest {
   --> AidRequest asset
 }
 
+/**
+Mark Pending ressources as lost
+*/
+transaction LostPendingRessouces {
+  --> AidRequest asset
+}
+
 transaction SetupDemo  {
 }
